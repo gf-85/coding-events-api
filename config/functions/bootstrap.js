@@ -13,7 +13,7 @@
 module.exports = async () => {
   const authenticated = await strapi.query('role', 'users-permissions').findOne({ type: 'authenticated' });
   authenticated.permissions.filter(permission => permission.type == 'application' && !permission.enabled).forEach(permission => {
-    strapi.query('permission', 'users-permissions').update( { id: permission.id}, {
+    strapi.query('permission', 'users-permissions').update( {id: permission.id}, {
       ...permission,
       enabled: true
     });
